@@ -1,0 +1,73 @@
+name: Run Selenium Tests
+
+on:
+  schedule:
+        #- cron: '*/5 * * * *' # Chạy mỗi 5' (chi de test)
+        #- cron: '0 * * * *'  # Chạy mỗi giờ
+        - cron: '0 */8 * * *'  # Chạy mỗi 3 tiếng (vào phút 00)
+        #- cron: '0 7 * * *'  # Chạy mỗi day at 7h UTC
+        #- cron: '0 0 * * *'  # Chạy mỗi day at 7h Vietnam
+
+  workflow_dispatch:  # Cho phép chạy thủ công
+
+jobs:
+  selenium-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'  # Chọn Java phiên bản phù hợp
+
+      - name: Setup Chrome and WebDriver
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+
+      - name: Build and Run Selenium Tests
+        run: |
+          cd AutoEmailCheck
+          xvfb-run --auto-servernum mvn -Dtest=EmailCheck test
+
+          
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: TestReport
+          path: ./AutoEmailCheck/src/reports/TestReport.html
+
+      - name: Debug Email Secrets
+        run: |
+          if [ -z "${{ secrets.EMAIL_USER }}" ]; then
+            echo "❌ EMAIL_USER chưa được thiết lập!"
+          else
+            echo "✅ EMAIL_USER đã được thiết lập: $(echo ${{ secrets.EMAIL_USER }} | sed 's/./& /g')"
+          fi
+
+          if [ -z "${{ secrets.EMAIL_PASS }}" ]; then
+            echo "❌ EMAIL_PASS chưa được thiết lập!"
+          else
+            echo "✅ EMAIL_PASS đã được thiết lập!"
+          fi
+          
+      - name: Send Email with Test Report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "Selenium Test Report"
+          body: "Attached is the latest Selenium test report."
+          to: "duyen.tran@namlongsoft.net"
+          from: "GitHub Actions"
+          attachments: "./AutoEmailCheck/src/reports/TestReport.html"
+
