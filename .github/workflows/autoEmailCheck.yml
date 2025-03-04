@@ -4,7 +4,7 @@ on:
   schedule:
         #- cron: '*/5 * * * *' # Chạy mỗi 5' (chi de test)
         #- cron: '0 * * * *'  # Chạy mỗi giờ
-        - cron: '0 */3 * * *'  # Chạy mỗi 3 tiếng (vào phút 00)
+        - cron: '0 */5 * * *'  # Chạy mỗi 3 tiếng (vào phút 00)
         #- cron: '0 7 * * *'  # Chạy mỗi day at 7h UTC
         #- cron: '0 0 * * *'  # Chạy mỗi day at 7h Vietnam
 
