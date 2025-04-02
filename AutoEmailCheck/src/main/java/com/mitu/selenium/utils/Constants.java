@@ -19,7 +19,7 @@ public class Constants {
 
     public final static String calendarXpath = "//*[@id=\"header_v2\"]/div/div[1]/div[2]";
     public final static String customerXpath = "//*[@id=\":r0:\"]/div/div/div[1]/ul/li[3]/a/p";
-    public final static String searchXpath = "//*[@id=\"wrapper-customer-list\"]/div[2]/div/div[1]/div[1]/div[2]/input";
+    public final static String searchXpath = "//*[@id="wrapper-customer-list"]/div[2]/div/div[1]/div[1]/div[2]/input";
     public final static String searchResultXpath = "//*[contains(text(), 'Test auto trigger')]";
 
     public final static String jobNameXpath = "//*[@id=\"customer_detail_layout\"]/div[1]/div[2]/div[3]/a[2]";
