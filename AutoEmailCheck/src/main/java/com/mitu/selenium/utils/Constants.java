@@ -1,7 +1,7 @@
 package com.mitu.selenium.utils;
 
 public class Constants {
-    public final static String URL = "https://beta.gorilladesk.com/auth/login";
+    public final static String URL = "https://v3.gorilladesk.com/auth/login";
     public final static String REPORT_PATH = "src/reports/TestReport.html";
     public final static String CHROME_DRIVER_PATH = "src/main/resources/chromedriver";
 
@@ -19,7 +19,7 @@ public class Constants {
 
     public final static String calendarXpath = "//*[@id=\"header_v2\"]/div/div[1]/div[2]";
     public final static String customerXpath = "//*[@id=\":r0:\"]/div/div/div[1]/ul/li[3]/a/p";
-    public final static String searchXpath = "//*[@id=\"search-ip\"";
+    public final static String searchXpath = "//*[@id=\"search-ip\"]";
     public final static String searchResultXpath = "//*[contains(text(), 'Test auto trigger')]";
 
     public final static String jobNameXpath = "//*[@id=\"customer_detail_layout\"]/div[1]/div[2]/div[3]/a[2]";

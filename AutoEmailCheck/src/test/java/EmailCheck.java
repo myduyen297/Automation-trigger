@@ -60,7 +60,7 @@ public class EmailCheck extends BaseTest {
 
         WebElement customer = driver.findElement(By.xpath(Constants.customerXpath));
         customer.click();
-
+///html/body/div[1]/div/div[4]/div/div[2]/form/input
         Utils.sleep(3);
         WebElement searchTf = driver.findElement(By.xpath(Constants.searchXpath));
         searchTf.sendKeys(Constants.SearchCharacter);
